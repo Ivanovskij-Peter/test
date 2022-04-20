@@ -1,0 +1,36 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 260px;
+  margin: 0 auto;
+  background: gainsboro;
+  padding: 10px;
+  margin-top: 80px;
+  text-align: center;
+  border-radius: 10px;
+}
+.container_input {
+  margin-bottom: 5px;
+  margin-top: 2px;
+}
+.container_list{
+list-style: none;
+background: grey;
+padding: 0;
+margin-top: 0;
+border: 1px solid black;
+min-width: 200px;
+border-radius: 10px;
+}
+.container_list_item{
+padding: 5px 10px;
+background: white;
+margin: 5px;
+border-radius: 10px;
+border: 1px solid paleturquoise;
+
+}
+
+

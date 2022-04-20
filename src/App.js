@@ -1,24 +1,56 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from "react";
+import useMoveArray from "./helpers/move";
+import fetchArtists from './helpers/fetch'
+import './styles.css';
+
 
 function App() {
+  const { move, add, show } = useMoveArray([1, 2, 3, 4, 5]);
+  const [value, setValue] = useState("");
+  
+  const handleChange = (e) => {
+    setValue(e.target.value);
+  };
+  const handleSubmit = async () => {
+    const data = await fetchArtists(value);
+    if (data && data.length) add(data);
+  };
+  useEffect(() => {
+    const updateInterval = setInterval(() => {
+      move();
+    }, 1000);
+
+    return () => {
+      clearInterval(updateInterval);
+    };
+  }, [move]);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+      <div
+       className='container'
+      >
+        <div className="container_input">
+          <input
+            type="text"
+            value={value}
+            onChange={handleChange}
+            placeholder="write something"
+          />
+          <button type="submit" onClick={handleSubmit} disabled={!value}>
+            Search
+          </button>
+        </div>
+        <ul
+         className="container_list"
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+          {show.map((elem) => (
+            <li
+             className="container_list_item"
+            >
+              {elem}
+            </li>
+          ))}
+        </ul>
+      </div>
   );
 }
 
